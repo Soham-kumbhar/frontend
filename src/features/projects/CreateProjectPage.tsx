@@ -10,7 +10,6 @@ export function CreateProjectPage() {
   const navigate = useNavigate();
 
   const [name, setName] = useState('');
-  const [path, setPath] = useState('');
   const [description, setDescription] = useState('');
 
   const [submitting, setSubmitting] = useState(false);
@@ -25,7 +24,6 @@ export function CreateProjectPage() {
 
       const project = await createProject({
         name: name.trim(),
-        path: path.trim(),
         description: description.trim() || undefined,
       });
 
@@ -52,7 +50,7 @@ export function CreateProjectPage() {
           <h1>CREATE NEW PROJECT</h1>
 
           <div className="page-description">
-            Register a project workspace in DATAGIT.
+            Create a new DATAGIT project workspace.
           </div>
         </div>
 
@@ -83,26 +81,6 @@ export function CreateProjectPage() {
             maxLength={200}
             required
           />
-        </div>
-
-        <div className="form-field">
-          <label htmlFor="project-path">
-            PROJECT PATH
-          </label>
-
-          <input
-            id="project-path"
-            type="text"
-            value={path}
-            onChange={(event) => setPath(event.target.value)}
-            placeholder="C:\Users\ADMIN\Desktop\my-project"
-            maxLength={1000}
-            required
-          />
-
-          <div className="form-help">
-            The backend requires this directory to already exist.
-          </div>
         </div>
 
         <div className="form-field">
@@ -144,8 +122,7 @@ export function CreateProjectPage() {
             className="cli-action"
             disabled={
               submitting ||
-              !name.trim() ||
-              !path.trim()
+              !name.trim()
             }
           >
             {submitting
